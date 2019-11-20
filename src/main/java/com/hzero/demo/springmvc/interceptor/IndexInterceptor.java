@@ -8,7 +8,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.util.Date;
 
 /**
- * 1、定义一个拦截器
+ * 这个拦截器用于拦截指定的controller，至于具体拦截哪个，只需在配置文件dispatcher-servlet.xml中配置即可。
  */
 public class IndexInterceptor extends HandlerInterceptorAdapter {
 
@@ -31,7 +31,7 @@ public class IndexInterceptor extends HandlerInterceptorAdapter {
      */
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
 
-        System.out.println("preHandle(), 在访问Controller之前被调用");
+        System.out.println("for Specific controller preHandle(), 在访问Controller之前被调用");
         return true;
 
     }
@@ -49,7 +49,7 @@ public class IndexInterceptor extends HandlerInterceptorAdapter {
      */
 
     public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler, ModelAndView modelAndView) throws Exception {
-        System.out.println("postHandle(), 在访问Controller之后，访问视图之前被调用,这里可以注入一个时间到modelAndView中，用于后续视图显示");
+        System.out.println("for Specific controller postHandle(), 在访问Controller之后，访问视图之前被调用,这里可以注入一个时间到modelAndView中，用于后续视图显示");
         modelAndView.addObject("date", "由拦截器生成的时间:" + new Date());
     }
 
@@ -64,7 +64,7 @@ public class IndexInterceptor extends HandlerInterceptorAdapter {
      */
     public void afterCompletion(HttpServletRequest request, HttpServletResponse response, Object handler, Exception ex) throws Exception {
 
-        System.out.println("afterCompletion(), 在访问视图之后被调用");
+        System.out.println("for Specific controller afterCompletion(), 在访问视图之后被调用");
     }
 
 }

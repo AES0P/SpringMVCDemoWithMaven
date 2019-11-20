@@ -4,6 +4,9 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.context.request.WebRequestInterceptor;
 
+/**
+ * 这个拦截器用于拦截所有的controller
+ */
 public class AllInterceptor implements WebRequestInterceptor {
 
     /**
@@ -12,7 +15,7 @@ public class AllInterceptor implements WebRequestInterceptor {
     @Override
     public void preHandle(WebRequest request) throws Exception {
         // TODO Auto-generated method stub
-        System.out.println("AllInterceptor...............................");
+        System.out.println("for ALL controller preHandle(), 在访问Controller之前被调用");
         request.setAttribute("request", "request", WebRequest.SCOPE_REQUEST);//这个是放到request范围内的，所以只能在当前请求中的request中获取到
         request.setAttribute("session", "session", WebRequest.SCOPE_SESSION);//这个是放到session范围内的，如果环境允许的话它只能在局部的隔离的会话中访问，否则就是在普通的当前会话中可以访问
         request.setAttribute("globalSession", "globalSession", WebRequest.SCOPE_GLOBAL_SESSION);//如果环境允许的话，它能在全局共享的会话中访问，否则就是在普通的当前会话中访问
@@ -25,6 +28,7 @@ public class AllInterceptor implements WebRequestInterceptor {
     @Override
     public void postHandle(WebRequest request, ModelMap map) throws Exception {
         // TODO Auto-generated method stub
+        System.out.println("for ALL controller postHandle(), 在访问Controller之后，访问视图之前被调用,这里可以注入一个时间到modelAndView中，用于后续视图显示");
         for (String key : map.keySet())
             System.out.println(key + "-------------------------");
         ;
@@ -39,7 +43,7 @@ public class AllInterceptor implements WebRequestInterceptor {
     public void afterCompletion(WebRequest request, Exception exception)
             throws Exception {
         // TODO Auto-generated method stub
-        System.out.println(exception + "-=-=--=--=-=-=-=-=-=-=-=-==-=--=-=-=-=");
+        System.out.println("for ALL controller afterCompletion(), 在访问视图之后被调用");
     }
 
 }

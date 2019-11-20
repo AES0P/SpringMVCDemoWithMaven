@@ -4,20 +4,30 @@
          xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd"
          version="3.1">
 
-    <!--    1、dispatcher 的任务就是拦截请求发送给 Spring MVC 控制器-->
+    <!--1.添加 spring 容器监听器,如果使用了Spring框架，一定要指定其位置并设置监听器-->
+    <!-- spring配置文件 -->
+    <context-param>
+        <param-name>contextConfigLocation</param-name>
+        <param-value>/WEB-INF/applicationContext.xml</param-value>
+    </context-param>
+
+    <!-- spring监听器 -->
+    <listener>
+        <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+    </listener>
+
+    <!--    2.dispatcher 的任务就是拦截请求发送给 Spring MVC 控制器-->
     <servlet>
         <servlet-name>dispatcher</servlet-name>
         <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
         <load-on-startup>1</load-on-startup>
     </servlet>
 
-    <!--   2、配置 Mapping 交给 对应Controller 处理-->
+    <!--   3.配置 Mapping 交给 对应Controller 处理-->
     <servlet-mapping>
         <servlet-name>dispatcher</servlet-name>
         <url-pattern>/</url-pattern>
     </servlet-mapping>
-
-
 
 
 </web-app>
